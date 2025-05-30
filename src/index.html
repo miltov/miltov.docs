@@ -1,0 +1,238 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>.miltov documentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
+  <style>
+  </style>
+</head>
+<body>
+  <div id="loading-screen">
+    <img src="https://i.imgur.com/4xE8AOs_d.webp?maxwidth=760&fidelity=grand" alt="logo" />
+  </div>
+
+  <header id="topbar">
+    <img src="https://i.imgur.com/4xE8AOs_d.webp?maxwidth=760&fidelity=grand" alt="logo" />
+    <nav>
+      <a href="#overview" class="nav-link">overview</a>
+      <a href="#robloxbot" class="nav-link">robloxbot api</a>
+      <a href="#webbackend" class="nav-link">webbackend api</a>
+      <a href="#keywords" class="nav-link">keywords</a>
+      <a href="#licenses" class="nav-link">licenses</a>
+      <a href="#contact" class="nav-link">contact us</a>
+    </nav>
+  </header>
+
+  <nav id="navbar">
+    <header>.miltov docs</header>
+    <ul>
+      <li><a class="nav-link" href="#overview">overview</a></li>
+      <li><a class="nav-link" href="#robloxbot">robloxbot api</a></li>
+      <li><a class="nav-link" href="#webbackend">webbackend api</a></li>
+      <li><a class="nav-link" href="#interpreter">keywords</a></li>
+    </ul>
+    <div class="donate">
+      ♡ support: <br />
+      <a href="https://paypal.me/miltocookie" target="_blank">paypal.me/miltocookie</a>
+    </div>
+  </nav>
+
+  <main id="main-doc">
+
+    <section class="main-section" id="overview">
+      <header>overview</header>
+      <p>This documentation describes all classes, methods, and keywords used by the <code>.miltov</code> interpreter and its modules: <code>robloxbot</code>, <code>webbackend</code>, and <code>miltovinterpreter</code>.</p>
+      <p>The <code>robloxbot</code> module interfaces with Roblox web APIs to automate Roblox-related tasks.</p>
+      <p>The <code>webbackend</code> module provides a minimal Express.js backend for web integrations.</p>
+      <p>The <code>miltovinterpreter</code> parses and executes <code>.miltov</code> scripts and offers language constructs and standard library functions.</p>
+    </section>
+
+    <section class="main-section" id="robloxbot">
+      <header>robloxbot</header>
+      <p>The <code>robloxbot</code> class wraps Roblox web API calls using your Roblox security cookie.</p>
+      <dl>
+        <dt><code>constructor(cookie)</code></dt>
+        <dd>Creates a new robloxbot instance with the provided Roblox security cookie (used for authenticated requests).</dd>
+
+        <dt><code>async getUserId()</code></dt>
+        <dd>Fetches your Roblox user ID from the <code>/mobileapi/userinfo</code> endpoint.</dd>
+
+        <dt><code>async getBalance()</code></dt>
+        <dd>Retrieves your Robux balance from the <code>/economy/balance</code> endpoint.</dd>
+
+        <dt><code>async getUserProfile(userId)</code></dt>
+        <dd>Returns Roblox profile info for a given <code>userId</code>.</dd>
+
+        <dt><code>async getPlayerGroups(userId)</code></dt>
+        <dd>Returns an array of groups the user belongs to, with their roles.</dd>
+
+        <dt><code>async setRank(groupId, userId, rankId)</code></dt>
+        <dd>Sets a user’s rank in a Roblox group.</dd>
+
+        <dt><code>async sendFriendRequest(userId)</code></dt>
+        <dd>Sends a friend request to the user ID.</dd>
+
+        <dt><code>async acceptFriendRequest(userId)</code></dt>
+        <dd>Accepts a pending friend request.</dd>
+
+        <dt><code>async declineFriendRequest(userId)</code></dt>
+        <dd>Declines a pending friend request.</dd>
+
+        <dt><code>async getFriends(userId)</code></dt>
+        <dd>Returns a list of the user’s friends.</dd>
+
+        <dt><code>async buyAsset(assetId)</code></dt>
+        <dd>Attempts to purchase an asset using its product ID.</dd>
+
+        <dt><code>async postShout(groupId, message)</code></dt>
+        <dd>Posts a shout in a specified group.</dd>
+
+        <dt><code>async joinGroup(groupId)</code></dt>
+        <dd>Joins the given group ID.</dd>
+
+        <dt><code>async leaveGroup(groupId)</code></dt>
+        <dd>Leaves the group, based on current user ID.</dd>
+      </dl>
+
+      <div class="code-block">
+        <pre>
+robloxbot = new robloxbot("your_cookie_here")
+userId = robloxbot.getUserId()
+balance = robloxbot.getBalance()
+profile = robloxbot.getUserProfile(userId)
+groups = robloxbot.getPlayerGroups(userId)
+robloxbot.sendFriendRequest(userId)
+robloxbot.acceptFriendRequest(userId)
+robloxbot.setRank(123456, userId, 255)
+        </pre>
+      </div>
+    </section>
+
+    <section class="main-section" id="webbackend">
+      <header>webbackend</header>
+      <p>The <code>webbackend</code> class provides minimal HTTP backend features to serve your site or API.</p>
+      <dl>
+        <dt><code>constructor()</code></dt>
+        <dd>Creates a new backend server instance using Express.js.</dd>
+
+        <dt><code>start(port)</code></dt>
+        <dd>Starts the server on the specified port. Defaults to 3000 if not provided.</dd>
+      </dl>
+
+      <div class="code-block">
+        <pre>
+backend = new webbackend()
+backend.start(8080)
+        </pre>
+      </div>
+    </section>
+
+    <section class="main-section" id="interpreter">
+      <header>keywords</header>
+      <p>The <code>keywords</code> are responsible for parsing and evaluating <code>.miltov</code> scripts using a custom syntax tree and evaluation engine.</p>
+      <dl>
+        <dt><code>milt x = "hello"</code></dt>
+        <dd>Declares a variable using the <code>milt</code> keyword.</dd>
+
+        <dt><code>print("text")</code></dt>
+        <dd>Outputs a value to the console.</dd>
+
+        <dt><code>func greet(name) { ... }</code></dt>
+        <dd>Declares a function.</dd>
+
+        <dt><code>if (...) { ... } else { ... }</code></dt>
+        <dd>Conditional execution.</dd>
+
+        <dt><code>while (...) { ... }</code></dt>
+        <dd>Looping structure.</dd>
+
+        <dt><code>message("text")</code></dt>
+        <dd>Sends a message using custom interpreter logic.</dd>
+
+        <dt><code>shout("text")</code></dt>
+        <dd>Posts a shout using Roblox integration.</dd>
+      </dl>
+
+      <div class="code-block">
+        <pre>
+milt username = "builderman"
+print("Welcome", username)
+
+func greet(name) {
+  message("Hello " + name)
+}
+
+greet(username)
+        </pre>
+      </div>
+    </section>
+    
+  <section class="main-section" id="licenses">
+  <header>licenses</header>
+  <p><strong>MIT License</strong></p>
+  <pre>
+MIT License
+
+Copyright (c) 2025 Miltos
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+  </pre>
+</section>
+
+ <section class="main-section" id="contact">
+  <header>contact us</header>
+  <form id="contact-form" action="https://formspree.io/f/xpwrarbd" method="POST">
+    <label for="name">your name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">your email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="message">your message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">send message</button>
+    <p id="form-status">we usually respond in a few hours.</p>
+  </form>
+</section>
+    
+  </main>
+
+  <script>
+    window.onload = () => {
+      const loading = document.getElementById('loading-screen');
+      loading.style.opacity = 0;
+      setTimeout(() => loading.style.display = 'none', 1000);
+    };
+
+    document.querySelectorAll('.code-block pre').forEach(block => {
+      const btn = document.createElement('button');
+      btn.textContent = 'copy';
+      btn.className = 'copy-btn';
+      block.parentNode.insertBefore(btn, block.nextSibling);
+      btn.addEventListener('click', () => {
+        navigator.clipboard.writeText(block.textContent.trim());
+        btn.textContent = 'copied!';
+        setTimeout(() => btn.textContent = 'copy', 1500);
+      });
+    });
+  </script>
+</body>
+</html>
